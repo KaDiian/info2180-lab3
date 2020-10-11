@@ -1,9 +1,9 @@
 window.onload = function() {
   
 let squares = document.querySelectorAll('#board div');
-var x = 0 //Counts the amount of clicks
+var x = 0 //Counts the amount of clicks the user does
 var c = []
-var j=9 //amount of clicks
+var j=9 //The amount the user is able to do
 var wins = [
   [0, 1, 2],
   [3, 4, 5],
@@ -14,7 +14,7 @@ var wins = [
   [0, 4, 8],
   [2, 4, 6],
 ];
-
+//function that checks the winner
 function checkResults() {
   for(let x = 0; x < 8; x++) {
       if(squares[wins[x][0]].innerHTML == 'X' && squares[wins[x][1]].innerHTML == 'X' && squares[wins[x][2]].innerHTML == 'X'){
@@ -25,7 +25,7 @@ function checkResults() {
   }
   return 'none';
 }
-
+//adds a mouseover function to the squares to hover over them
 for(let i = 0; i < squares.length; i++){
   squares[i].addEventListener('mouseover', function (){    
     if(squares[i].innerHTML ==''){ 
@@ -43,7 +43,7 @@ squares[i].classList.add('square');
 squares[i].addEventListener('click', function(){
 squares[i].classList.remove("hover");
 if(x%2==0){
-  if(squares[i].innerHTML==''){
+  if(squares[i].innerHTML=='' && x<=9){
     squares[i].classList.add ("square","X");
     squares[i].innerHTML = 'X';
     c.push(squares[i].innerHTML); 
@@ -51,13 +51,15 @@ if(x%2==0){
       console.log("X win this");  
       document.getElementById("status").className += "you-won";
       document.getElementById("status").innerHTML = ("Congratulation! X is the Winner");
+     //set the amount of clicks to maximum so that when Someone win, no more clicks are allowed
+      x=9;
     }  
     j--;         
     x++;
   }
 }else
 {
-  if(squares[i].innerHTML==''){
+  if(squares[i].innerHTML=='' && x<=9){
     squares[i].classList.add ("square","O");
     squares[i].innerHTML = 'O';
     c.push(squares[i].innerHTML);
@@ -65,6 +67,7 @@ if(x%2==0){
       console.log("O win this");
       document.getElementById("status").className += "you-won";
       document.getElementById("status").innerHTML = ("Congratulation! O is the Winner");
+      x=9;
     } 
     j--;
     x++;
@@ -78,10 +81,11 @@ if(checkResults()=='none' && j==0){
 } 
 });
 }
+//Restart the Game board
 let button = document.querySelector("button");
 button.addEventListener("click", function() {
   for(let i = 0; i < squares.length; i++) {
-    if (squares[i].innerHTML = 'O' || 'X'){
+  if (squares[i].innerHTML = 'O' || 'X') {
   squares[i].classList.remove("squares","X","O");
   squares[i].innerHTML = '';
 
