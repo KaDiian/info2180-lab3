@@ -78,4 +78,18 @@ if(checkResults()=='none' && j==0){
 } 
 });
 }
+let button = document.querySelector("button");
+button.addEventListener("click", function() {
+  for(let i = 0; i < squares.length; i++) {
+    if (squares[i].innerHTML = 'O' || 'X'){
+  squares[i].classList.remove("squares","X","O");
+  squares[i].innerHTML = '';
+
+  document.getElementById("status").classList.remove("you-won");
+  document.getElementById("status").innerHTML = ("Move your mouse over a square and click to play an X or an O.");
+  x=0;
+  j=9;
+   }
+  }
+});
 }
